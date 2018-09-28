@@ -15,6 +15,7 @@
 		3992E8DB2141A1CB005480B8 /* Hands.png in Resources */ = {isa = PBXBuildFile; fileRef = 3992E8D82141A1CB005480B8 /* Hands.png */; };
 		3992E8DC2141A1CB005480B8 /* WhiteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3992E8D92141A1CB005480B8 /* WhiteIcon.png */; };
 		3992E8DE214AD82D005480B8 /* LoginVCx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992E8DD214AD82D005480B8 /* LoginVCx.swift */; };
+		399A67E62151A43E00BF3548 /* RegistrerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399A67E52151A43E00BF3548 /* RegistrerVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		3992E8D82141A1CB005480B8 /* Hands.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hands.png; sourceTree = "<group>"; };
 		3992E8D92141A1CB005480B8 /* WhiteIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteIcon.png; sourceTree = "<group>"; };
 		3992E8DD214AD82D005480B8 /* LoginVCx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVCx.swift; sourceTree = "<group>"; };
+		399A67E52151A43E00BF3548 /* RegistrerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrerVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				3992E8CE21419745005480B8 /* LaunchScreen.storyboard */,
 				3992E8D121419745005480B8 /* Info.plist */,
 				3992E8DD214AD82D005480B8 /* LoginVCx.swift */,
+				399A67E52151A43E00BF3548 /* RegistrerVC.swift */,
 			);
 			path = Facebook;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3992E8C621419745005480B8 /* AppDelegate.swift in Sources */,
+				399A67E62151A43E00BF3548 /* RegistrerVC.swift in Sources */,
 				3992E8DE214AD82D005480B8 /* LoginVCx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
