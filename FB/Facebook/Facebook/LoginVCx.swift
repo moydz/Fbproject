@@ -15,11 +15,83 @@ class LoginVCx: UIViewController {
     @IBOutlet weak var leftLineView: UIView!
     @IBOutlet weak var rightLineView: UIView!
     @IBOutlet weak var registrerButton: UIButton!
+    @IBOutlet weak var handsImageView: UIImageView!
+    
+    //constraints
+    @IBOutlet weak var coverImageView_top: NSLayoutConstraint!
+    @IBOutlet weak var whiteIconImageView_y: NSLayoutConstraint!
+    @IBOutlet weak var handsImageView_top: NSLayoutConstraint!
+    @IBOutlet weak var registrerButton_buttom: NSLayoutConstraint!
+    
+    
+    
+    //variable
+    var stado = 0
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(false)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification){
+        
+        if(stado == 0){
+            coverImageView_top.constant -= 75
+            handsImageView_top.constant  -= 75
+            whiteIconImageView_y.constant += 50
+            
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue{
+                registrerButton_buttom.constant += keyboardSize.height
+            }
+            stado = 1
+        }
+        
+        
+        
+        //animation function . ocultamos la imagen
+        UIView.animate(withDuration: 0.5){
+            self.handsImageView.alpha = 0
+            self.view.layoutIfNeeded()
+            
+        }
+        
+    }
+    
+    @objc func keyboardWillHide(notification: Notification){
+        
+        coverImageView_top.constant += 75
+        handsImageView_top.constant  += 75
+        whiteIconImageView_y.constant -= 50
+        stado = 0
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue{
+            registrerButton_buttom.constant -= keyboardSize.height
+        }
+        
+        //animation function. mostramos la imagen
+        UIView.animate(withDuration: 0.5){
+            self.handsImageView.alpha = 1
+            self.view.layoutIfNeeded()
+        }
     }
 
     override func viewDidLayoutSubviews() {

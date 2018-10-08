@@ -15,6 +15,8 @@
 		3992E8DB2141A1CB005480B8 /* Hands.png in Resources */ = {isa = PBXBuildFile; fileRef = 3992E8D82141A1CB005480B8 /* Hands.png */; };
 		3992E8DC2141A1CB005480B8 /* WhiteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3992E8D92141A1CB005480B8 /* WhiteIcon.png */; };
 		3992E8DE214AD82D005480B8 /* LoginVCx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992E8DD214AD82D005480B8 /* LoginVCx.swift */; };
+		399A67E62151A43E00BF3548 /* RegistrerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399A67E52151A43E00BF3548 /* RegistrerVC.swift */; };
+		39A8A0D8216B9D33009B9756 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A8A0D7216B9D33009B9756 /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		3992E8D82141A1CB005480B8 /* Hands.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hands.png; sourceTree = "<group>"; };
 		3992E8D92141A1CB005480B8 /* WhiteIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteIcon.png; sourceTree = "<group>"; };
 		3992E8DD214AD82D005480B8 /* LoginVCx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVCx.swift; sourceTree = "<group>"; };
+		399A67E52151A43E00BF3548 /* RegistrerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrerVC.swift; sourceTree = "<group>"; };
+		39A8A0D7216B9D33009B9756 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				3992E8CE21419745005480B8 /* LaunchScreen.storyboard */,
 				3992E8D121419745005480B8 /* Info.plist */,
 				3992E8DD214AD82D005480B8 /* LoginVCx.swift */,
+				399A67E52151A43E00BF3548 /* RegistrerVC.swift */,
+				39A8A0D7216B9D33009B9756 /* Helper.swift */,
 			);
 			path = Facebook;
 			sourceTree = "<group>";
@@ -105,6 +111,7 @@
 				TargetAttributes = {
 					3992E8C121419745005480B8 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -148,7 +155,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3992E8C621419745005480B8 /* AppDelegate.swift in Sources */,
+				399A67E62151A43E00BF3548 /* RegistrerVC.swift in Sources */,
 				3992E8DE214AD82D005480B8 /* LoginVCx.swift in Sources */,
+				39A8A0D8216B9D33009B9756 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +309,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = appFB.Facebook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -317,7 +326,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = appFB.Facebook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
