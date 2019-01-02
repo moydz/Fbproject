@@ -8,14 +8,33 @@
 
 import UIKit
 
+// golobal var
+var currentUser: NSMutableDictionary?
+
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //loading current user
+        currentUser = UserDefaults.standard.object(forKey: "currentUser") as? NSMutableDictionary
+        
+        
+        // cheking is the glob variable that stores current user's 
+        if currentUser?["id"] != nil{
+            
+            //accessing TobBar controller via Main.storyboard
+            let TabBar = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBar")
+            // assigning TabBar as RootViewController of the project
+            window?.rootViewController =  TabBar
+        }
+        
         return true
     }
 
