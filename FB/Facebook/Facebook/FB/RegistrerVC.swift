@@ -261,7 +261,8 @@ class RegistrerVC: UIViewController {
     
     @IBAction func genderButton_clicked(_ sender: Any) {
         
-        let url = URL(string: "localhost/fb/register.php")
+        let server = Helper().getUrlServer()
+        let url = URL(string: "\(server)fb/register.php")
         var gender = ""
         if (sender as AnyObject).tag == 0{
             print("Female")

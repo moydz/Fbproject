@@ -219,7 +219,8 @@ class LoginVCx: UIViewController {
     // sending request ti the server
     func loginRequest(){
         
-        let url = URL(string: "localhost/fb/login.php")
+        let server = Helper().getUrlServer()
+        let url = URL(string: "\(server)fb/login.php")
         let body = "email=\(emailTextField.text!.lowercased())&password=\(passwordTextField.text!)"
         
         var request = URLRequest(url: url!)

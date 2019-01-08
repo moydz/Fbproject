@@ -13,6 +13,13 @@ class HomeVC: UITableViewController, UINavigationControllerDelegate, UIImagePick
     // ui obj
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var avaImageView: UIImageView!
+    @IBOutlet weak var fullnameLabel: UILabel!
+    @IBOutlet weak var addBioButton: UIButton!
+    @IBOutlet weak var bioLabel: UILabel!
+    @IBOutlet weak var postButton: UIButton!
+    
+    
+    
     
     // code obj (to build logic of distinguishing tapped / shown Cover / Ava)
     var isCover = false
@@ -25,10 +32,48 @@ class HomeVC: UITableViewController, UINavigationControllerDelegate, UIImagePick
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // add observers for notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(loadUser), name: NSNotification.Name(rawValue: "updateBio"), object: nil)
+        
         // run funcs
         configure_avaImageView()
+        loadUser()
     }
     
+    // loads all user related information to be shiown in the header
+    @objc func loadUser(){
+        
+        // safe method of accessing user related information in glob user 
+        guard let firstName = currentUser?["firstName"],
+              let lastName = currentUser?["lastName"],
+              let avaPath = currentUser?["ava"],
+              let coverPath = currentUser?["cover"],
+              let bio = currentUser?["bio"] else
+        {
+            return
+        }
+        
+        // assigning vars which ws accessed fro global var , to fullnameLabel
+        fullnameLabel.text = "\((firstName as! String).capitalized) \((lastName as! String).capitalized)"
+        
+        // downloading the images and assigning to certain imageview
+        Helper().downloadImage(from: avaPath as! String, showIn: avaImageView, orShow: "user.png")
+        Helper().downloadImage(from: coverPath as! String, showIn: coverImageView, orShow: "HomeCover.jpg")
+        
+        // if bio is Emty in the server --> hide bio label , otherwise , show bio label
+        if (bio as! String).isEmpty{
+            bioLabel.isHidden = true
+            addBioButton.isHidden = false
+        }else{
+            bioLabel.text = "\(bio)"
+            bioLabel.isHidden = false
+            addBioButton.isHidden = true
+        }
+        
+    }
+    
+    
+
     
     // configuring the appearance of AvaImageView
     func configure_avaImageView() {
@@ -196,7 +241,8 @@ class HomeVC: UITableViewController, UINavigationControllerDelegate, UIImagePick
         
         // STEP 1. Declare URL, Request and Params
         // url we gonna access (API)
-        let url = URL(string: "http://localhost/fb/uploadImage.php")!
+        let server = Helper().getUrlServer()
+        let url = URL(string: "\(server)fb/uploadImage.php")!
         
         // declaring reqeust with further configs
         var request = URLRequest(url: url)
@@ -275,6 +321,132 @@ class HomeVC: UITableViewController, UINavigationControllerDelegate, UIImagePick
         
     }
     
+    
+    // execute when add bio
+    @IBAction func addButton_clicked(_ sender: Any) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BioVC")
+        self.present(vc, animated: true, completion: nil)
+        
+    }
+    
+    
+    @IBAction func postButton_clicked(_ sender: Any) {
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "postVC")
+        self.present(vc, animated: true, completion: nil)
+        
+    }
+    
+    
+    // execute when bio label has been tapped
+    @IBAction func bioLabel_tapped(_ sender: Any) {
+        
+        // declaring action sheet
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        
+        // declaring bio button
+        let bio = UIAlertAction(title: "New Bio", style: .default) { (action) in
+           let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BioVC")
+            
+            self.present(vc, animated: true, completion: nil)
+            
+        }
+        
+        
+        
+        // declaring cancel button
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        
+        // declaring delete button
+        let delete = UIAlertAction(title: "Delete Bio", style: .destructive) { (action) in
+            
+            self.updateBio()
+        }
+        
+        // adding buttons to the sheet
+        sheet.addAction(bio)
+        sheet.addAction(cancel)
+        sheet.addAction(delete)
+        
+        // present action sheet to the user finally
+        self.present(sheet, animated: true, completion: nil)
+        
+    }
+    
+    
+    // deleting bio by sending reuest to the sever
+    func updateBio(){
+        
+        guard  let id = currentUser?["id"]
+            else{
+                return
+        }
+        let bio = ""
+        
+        let server = Helper().getUrlServer()
+        let url = URL(string: "\(server)fb/updateBio.php")!
+        let body = "id=\(id)&bio=\(bio)"
+        // declaring reqeust with further configs
+        var request = URLRequest(url: url)
+        // POST - safest method of passing data to the server
+        request.httpMethod = "POST"
+        request.httpBody = body.data(using: .utf8)
+        
+        
+        // STEP 3. Execute and Launch Request
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            DispatchQueue.main.async {
+                
+                // error
+                if error != nil {
+                    Helper().showAlert(title: "Server Error", message: error!.localizedDescription, from: self)
+                    return
+                }
+                
+                // go to data and jsoning
+                do {
+                    
+                    // save method of casting data received from the server
+                    guard let data = data else {
+                        Helper().showAlert(title: "Data Error", message: error!.localizedDescription, from: self)
+                        return
+                    }
+                    
+                    // STEP 4. Parse JSON
+                    let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary
+                    
+                    // save method of casting json
+                    guard let parsedJSON = json else {
+                        return
+                    }
+                    
+                    // updated successfully
+                    if parsedJSON["status"] as! String == "200" {
+                        
+                        // save updated user information in the app
+                        currentUser = parsedJSON.mutableCopy() as? NSMutableDictionary
+                        UserDefaults.standard.set(currentUser, forKey: "currentUser")
+                        UserDefaults.standard.synchronize()
+                        
+                        // reload user
+                        self.loadUser()
+                        // error while updating (e.g. Status = 400)
+                    } else {
+                        Helper().showAlert(title: "400", message: "Error while updating the bio", from: self)
+                    }
+                    
+                    // error while processing/accessing json
+                } catch {
+                    Helper().showAlert(title: "JSON Error", message: error.localizedDescription, from: self)
+                }
+                
+            }
+            
+            }.resume()
+        
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 0

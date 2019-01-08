@@ -82,4 +82,44 @@ class Helper{
         return body
     }
     
-}
+   
+    func downloadImage(from path:String , showIn imageView: UIImageView, orShow placeholder: String){
+        
+        // if avaPath string is having a valid url
+        if String(describing: path).isEmpty == false {
+            DispatchQueue.main.async {
+                if let url = URL(string: (path)){
+                    
+                    guard let data = try? Data(contentsOf: url) else{
+                        imageView.image = UIImage(named: placeholder)
+                        return
+                    }
+                    
+                    // converting donwloaded data to imger
+                    guard let image = UIImage(data: data) else {
+                        imageView.image = UIImage(named: placeholder)
+                        return
+                    }
+                    
+                    // assigning image to the imageView
+                    
+                    imageView.image = image
+                }
+                
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    
+    func getUrlServer() -> String {
+         let url = "http://172.23.112.251/"
+         return url
+    }
+    
+    
+    
+}//end helper

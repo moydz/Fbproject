@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		398039D521E399BC00F33ED3 /* BioVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398039D421E399BC00F33ED3 /* BioVC.swift */; };
+		398039D821E4F6B700F33ED3 /* RoundUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398039D721E4F6B700F33ED3 /* RoundUIView.swift */; };
 		3992E8C621419745005480B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3992E8C521419745005480B8 /* AppDelegate.swift */; };
 		3992E8CB21419745005480B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3992E8C921419745005480B8 /* Main.storyboard */; };
 		3992E8CD21419745005480B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3992E8CC21419745005480B8 /* Assets.xcassets */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		398039D421E399BC00F33ED3 /* BioVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioVC.swift; sourceTree = "<group>"; };
+		398039D721E4F6B700F33ED3 /* RoundUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUIView.swift; sourceTree = "<group>"; };
 		3992E8C221419745005480B8 /* Facebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Facebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3992E8C521419745005480B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3992E8CA21419745005480B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -66,6 +70,7 @@
 				399A67E52151A43E00BF3548 /* RegistrerVC.swift */,
 				39A8A0D7216B9D33009B9756 /* Helper.swift */,
 				39E7C1B92177DD71001E29D8 /* HomeVC.swift */,
+				398039D421E399BC00F33ED3 /* BioVC.swift */,
 			);
 			path = FB;
 			sourceTree = "<group>";
@@ -84,6 +89,14 @@
 				3992E8D92141A1CB005480B8 /* WhiteIcon.png */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		398039D621E4F69700F33ED3 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				398039D721E4F6B700F33ED3 /* RoundUIView.swift */,
+			);
+			path = util;
 			sourceTree = "<group>";
 		};
 		3992E8B921419745005480B8 = {
@@ -105,6 +118,7 @@
 		3992E8C421419745005480B8 /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
+				398039D621E4F69700F33ED3 /* util */,
 				398039D321DD1FBF00F33ED3 /* images */,
 				398039D221DD1F9900F33ED3 /* FB */,
 				3992E8C521419745005480B8 /* AppDelegate.swift */,
@@ -197,7 +211,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				398039D821E4F6B700F33ED3 /* RoundUIView.swift in Sources */,
 				3992E8C621419745005480B8 /* AppDelegate.swift in Sources */,
+				398039D521E399BC00F33ED3 /* BioVC.swift in Sources */,
 				39E7C1BA2177DD71001E29D8 /* HomeVC.swift in Sources */,
 				399A67E62151A43E00BF3548 /* RegistrerVC.swift in Sources */,
 				3992E8DE214AD82D005480B8 /* LoginVCx.swift in Sources */,
@@ -346,6 +362,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S65UQAT56B;
 				INFOPLIST_FILE = Facebook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -363,6 +380,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S65UQAT56B;
 				INFOPLIST_FILE = Facebook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
